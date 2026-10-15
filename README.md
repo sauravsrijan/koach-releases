@@ -4,14 +4,14 @@ Built releases of **Koach**, a communication coach for macOS (Apple Silicon and 
 
 ## Install
 
-1. Download `Koach-<version>-universal.zip` from the [latest release](https://github.com/sauravsrijan/koach-releases/releases/latest) and unzip it.
-2. Move `Koach.app` to **Applications**.
-3. Koach isn't notarized yet, so clear the download quarantine once:
+1. Download `Koach-<version>-universal.dmg` from the [latest release](https://github.com/sauravsrijan/koach-releases/releases/latest), open it, and drag **Koach** onto **Applications**.
+2. Koach isn't notarized yet, so macOS blocks the first launch. Either run this once in Terminal:
 
    ```sh
    xattr -dr com.apple.quarantine /Applications/Koach.app
    ```
 
-4. Open Koach and follow the setup.
+   or open Koach, then go to **System Settings → Privacy & Security** and click **Open Anyway**.
+3. Follow the setup (your name, Microphone and Screen Recording, your API keys).
 
 After that, Koach checks for updates on its own and offers to restart when one is ready.
