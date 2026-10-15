@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Koach for Mac</title>
+  <meta name="description" content="Koach coaches you on how you communicate in your calls. Download for macOS." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4f0ea;
+      --surface: #fdfbf7;
+      --surface-2: #f8f4ee;
+      --ink: #2a2521;
+      --ink-2: #6f655a;
+      --ink-3: #a59a8c;
+      --line: #e6ded2;
+      --accent: #b35531;
+      --accent-ink: #8f3f22;
+      --accent-tint: #f7e9e0;
+      --good: #5f7d57;
+      --shadow: 0 2px 8px rgba(60, 45, 30, 0.06), 0 12px 32px rgba(60, 45, 30, 0.06);
+      --font: "Hanken Grotesk", system-ui, sans-serif;
+      --serif: "Newsreader", Georgia, serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #1c1916;
+        --surface: #25211d;
+        --surface-2: #2c2723;
+        --ink: #f1ebe3;
+        --ink-2: #c3b8aa;
+        --ink-3: #8d8275;
+        --line: #3a342e;
+        --accent: #d4744d;
+        --accent-ink: #e89a78;
+        --accent-tint: #3b2a22;
+        --good: #93b088;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.25);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #1c1916;
+      --surface: #25211d;
+      --surface-2: #2c2723;
+      --ink: #f1ebe3;
+      --ink-2: #c3b8aa;
+      --ink-3: #8d8275;
+      --line: #3a342e;
+      --accent: #d4744d;
+      --accent-ink: #e89a78;
+      --accent-tint: #3b2a22;
+      --good: #93b088;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-ink); }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+    header { padding: 28px 0 0; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; text-decoration: none; color: var(--ink); }
+    .mark { width: 30px; height: 30px; border-radius: 9px; background: var(--accent); display: grid; place-items: center; }
+    .mark span { width: 11px; height: 11px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px var(--accent), 0 0 0 4px rgba(255,255,255,.5) inset; }
+
+    .hero { padding: 72px 0 56px; text-align: center; }
+    h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(38px, 7vw, 60px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 18px; text-wrap: balance; }
+    .lede { font-size: 18px; color: var(--ink-2); max-width: 560px; margin: 0 auto 34px; text-wrap: pretty; }
+    .download { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; font-size: 17px; padding: 15px 26px; border-radius: 14px; box-shadow: var(--shadow); transition: transform .12s, background .15s; }
+    .download:hover { background: var(--accent-ink); }
+    .download:active { transform: translateY(1px); }
+    .download svg { width: 20px; height: 20px; }
+    .meta { margin-top: 14px; font-size: 13.5px; color: var(--ink-3); }
+
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: var(--shadow); margin-bottom: 20px; }
+    h2 { font-family: var(--serif); font-weight: 500; font-size: 26px; letter-spacing: -0.01em; margin: 0 0 14px; }
+    .features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 28px; margin: 0; padding: 0; list-style: none; }
+    .features b { display: block; font-size: 15px; margin-bottom: 2px; }
+    .features span { color: var(--ink-2); font-size: 14.5px; }
+
+    ol.steps { counter-reset: step; list-style: none; margin: 0; padding: 0; }
+    ol.steps li { counter-increment: step; position: relative; padding: 0 0 18px 44px; }
+    ol.steps li:last-child { padding-bottom: 0; }
+    ol.steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-tint); color: var(--accent-ink); font-weight: 700; font-size: 14px; display: grid; place-items: center; }
+    ol.steps b { display: block; }
+    ol.steps span { color: var(--ink-2); font-size: 15px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 7px; padding: 2px 6px; }
+    pre { margin: 10px 0 0; overflow-x: auto; }
+    pre code { display: block; padding: 10px 12px; }
+
+    .notes { color: var(--ink-2); font-size: 15px; }
+    .notes ul { margin: 0; padding-left: 20px; }
+    .notes li { margin-bottom: 4px; }
+    .notes-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .notes-head small { color: var(--ink-3); font-size: 13px; }
+
+    footer { padding: 26px 0 48px; text-align: center; color: var(--ink-3); font-size: 13.5px; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 48px 0 40px; }
+      .card { padding: 22px 18px; }
+      .features { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./"><span class="mark"><span></span></span>Koach</a>
+    </header>
+
+    <section class="hero">
+      <h1>Hear how you really come across in your calls.</h1>
+      <p class="lede">Koach records your calls on your Mac, transcribes them, and coaches you on how you communicate: how much you talk, the questions you ask, your pace, filler words, and what you promised to do.</p>
+      <!-- Stable link: every release also uploads Koach.dmg, so this always serves the newest version. -->
+      <a class="download" id="download" href="https://github.com/sauravsrijan/koach-releases/releases/latest/download/Koach.dmg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12" /><path d="M7 10l5 5 5-5" /><path d="M5 21h14" /></svg>
+        Download for Mac
+      </a>
+      <div class="meta" id="meta">macOS 13 or later · Apple Silicon and Intel</div>
+    </section>
+
+    <section class="card">
+      <h2>What it does</h2>
+      <ul class="features">
+        <li><b>Records both sides</b><span>Your mic and the call's audio, from Zoom, Meet, Slack or anything else.</span></li>
+        <li><b>Coaching after every call</b><span>A summary, how your tone came across, and specific suggestions.</span></li>
+        <li><b>Your numbers over time</b><span>Talk ratio, questions, pace and filler words, with trends.</span></li>
+        <li><b>Action items</b><span>Who promised what, with priorities and deadlines, in one list.</span></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Install</h2>
+      <ol class="steps">
+        <li><b>Open the download and drag Koach to Applications.</b></li>
+        <li>
+          <b>Allow it to open the first time.</b>
+          <span>Koach isn't notarized by Apple yet, so macOS blocks the first launch. Open Koach, then go to System Settings → Privacy &amp; Security and click <i>Open Anyway</i>. Or run this once in Terminal:</span>
+          <pre><code>xattr -dr com.apple.quarantine /Applications/Koach.app</code></pre>
+        </li>
+        <li>
+          <b>Follow the setup.</b>
+          <span>Your name, Microphone and Screen Recording permission, and your own API keys: an <a href="https://www.assemblyai.com/" rel="noopener">AssemblyAI</a> key for transcripts, plus one of Anthropic, OpenAI or OpenRouter for coaching.</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>Private by design</h2>
+      <p class="notes" style="margin: 0">Recordings, transcripts and coaching are stored encrypted on your Mac. Audio goes straight from your Mac to AssemblyAI using your key, and transcripts to the coaching provider you pick. Nothing passes through Koach's servers. Koach updates itself and asks before restarting.</p>
+    </section>
+
+    <section class="card" id="notes-card" hidden>
+      <div class="notes-head">
+        <h2 id="notes-title">What's new</h2>
+        <small id="notes-date"></small>
+      </div>
+      <div class="notes" id="notes"></div>
+    </section>
+
+    <footer>
+      <a href="https://github.com/sauravsrijan/koach-releases/releases">All releases</a>
+    </footer>
+  </div>
+
+  <script>
+    // Enhance with the latest release's version and notes. The download link
+    // above already works without this (stable Koach.dmg on the latest release).
+    (async () => {
+      try {
+        const res = await fetch("https://api.github.com/repos/sauravsrijan/koach-releases/releases/latest", {
+          headers: { Accept: "application/vnd.github+json" },
+        });
+        if (!res.ok) return;
+        const rel = await res.json();
+        const version = (rel.tag_name || "").replace(/^v/, "");
+        const dmg = (rel.assets || []).find((a) => a.name === "Koach.dmg") || (rel.assets || []).find((a) => a.name.endsWith(".dmg"));
+        if (dmg) document.getElementById("download").href = dmg.browser_download_url;
+        const date = rel.published_at
+          ? new Date(rel.published_at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })
+          : "";
+        if (version) {
+          document.getElementById("meta").textContent = `Version ${version}${date ? ` · ${date}` : ""} · macOS 13 or later · Apple Silicon and Intel`;
+        }
+
+        const lines = (rel.body || "")
+          .split("\n")
+          .map((l) => l.trim())
+          .filter((l) => l.startsWith("- "))
+          .map((l) => l.slice(2).replace(/\s*\((QUI-[\d, -]+)\)\s*$/, ""))
+          .slice(0, 12);
+        if (lines.length) {
+          const ul = document.createElement("ul");
+          for (const text of lines) {
+            const li = document.createElement("li");
+            li.textContent = text;
+            ul.appendChild(li);
+          }
+          document.getElementById("notes").appendChild(ul);
+          document.getElementById("notes-title").textContent = version ? `What's new in ${version}` : "What's new";
+          document.getElementById("notes-date").textContent = date;
+          document.getElementById("notes-card").hidden = false;
+        }
+      } catch {
+        // Offline or rate-limited: the page still works.
+      }
+    })();
+  </script>
+</body>
+</html>
